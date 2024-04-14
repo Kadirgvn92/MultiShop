@@ -14,8 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="DTOs\ProductImageDTOs\" />
-    <Folder Include="DTOs\ProductDetailDTOs\" />
   </ItemGroup>
 
 </Project>
