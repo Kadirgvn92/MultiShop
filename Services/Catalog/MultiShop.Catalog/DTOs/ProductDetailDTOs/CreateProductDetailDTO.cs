@@ -1,6 +1,6 @@
 ﻿namespace MultiShop.Catalog.DTOs.ProductDetailDTOs;
 
-public class CreateProductImageDTO
+public class CreateProductDetailDTO
 {
     public string ProductDescription { get; set; }
     public string ProductInfo { get; set; }
