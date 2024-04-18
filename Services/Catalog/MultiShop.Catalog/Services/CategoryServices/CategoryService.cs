@@ -6,12 +6,12 @@ using MultiShop.Catalog.Settings;
 
 namespace MultiShop.Catalog.Services.CategoryServices;
 
-public class CategoryService : ICategoryService
+public class ProductImageService : IProductImageService
 {
     private readonly IMongoCollection<Category> _categoryCollection;
     private readonly IMapper _mapper;
 
-    public CategoryService(IMapper mapper,IDatabaseSettings _databaseSettings)
+    public ProductImageService(IMapper mapper,IDatabaseSettings _databaseSettings)
     {
         var client = new MongoClient(_databaseSettings.ConnectionString);
         var database = client.GetDatabase(_databaseSettings.DatabaseName);

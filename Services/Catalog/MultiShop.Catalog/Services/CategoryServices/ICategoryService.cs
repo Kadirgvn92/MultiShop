@@ -2,7 +2,7 @@
 
 namespace MultiShop.Catalog.Services.CategoryServices;
 
-public interface ICategoryService
+public interface IProductImageService
 {
     Task<List<ResultCategoryDTO>> GetAllCategoryAsync();
     Task CreateCategoryAsync(CreateCategoryDTO createCategoryDto);
