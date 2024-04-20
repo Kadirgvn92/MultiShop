@@ -1,8 +1,8 @@
 ﻿using MultiShop.Catalog.Services.CategoryServices;
-using MultiShop.Catalog.Services.ProductDetailServices;
 using MultiShop.Catalog.Services.ProductImageServices;
 using MultiShop.Catalog.Services.ProductServices;
 using Microsoft.Extensions.Options;
+using MultiShop.Catalog.Services.ProductDetailServices;
 
 namespace MultiShop.Catalog.Settings;
 
