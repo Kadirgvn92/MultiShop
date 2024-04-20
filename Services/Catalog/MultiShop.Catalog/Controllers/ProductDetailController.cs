@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Catalog.DTOs.ProductDetailDTOs;
-using MultiShop.Catalog.Services.ProductDetailDetailServices;
 using MultiShop.Catalog.Services.ProductDetailServices;
 
 namespace MultiShop.Catalog.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class ProductDetailDetailController : ControllerBase
+public class ProductDetailController : ControllerBase
 {
     private readonly IProductDetailService _ProductDetailService;
-    public ProductDetailDetailController(IProductDetailService ProductDetailService)
+    public ProductDetailController(IProductDetailService ProductDetailService)
     {
         _ProductDetailService = ProductDetailService;
     }
@@ -23,7 +22,7 @@ public class ProductDetailDetailController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetProductDetailById(string id)
     {
-        var values = _ProductDetailService.GetByIdProductDetailAsync(id);
+        var values = await _ProductDetailService.GetByIdProductDetailAsync(id);
         return Ok(values);
     }
     [HttpPost]

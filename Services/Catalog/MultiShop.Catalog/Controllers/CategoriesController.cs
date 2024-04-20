@@ -6,11 +6,11 @@ using MultiShop.Catalog.Services.CategoryServices;
 namespace MultiShop.Catalog.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class CategoriesController : ControllerBase
+public class CategoryController : ControllerBase
 {
     private readonly ICategoryService _categoryService;
 
-    public CategoriesController(ICategoryService categoryService)
+    public CategoryController(ICategoryService categoryService)
     {
         _categoryService = categoryService;
     }
@@ -23,7 +23,7 @@ public class CategoriesController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCategoryById(string id)
     {
-        var values = _categoryService.GetByIdCategoryAsync(id);
+        var values = await _categoryService.GetByIdCategoryAsync(id);
         return Ok(values);
     }
     [HttpPost]

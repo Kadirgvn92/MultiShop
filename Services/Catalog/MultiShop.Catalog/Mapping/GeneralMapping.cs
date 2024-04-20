@@ -31,8 +31,5 @@ public class GeneralMapping : Profile
         CreateMap<ProductImages,CreateProductImageDTO>().ReverseMap();
         CreateMap<ProductImages,UpdateProductImageDTO>().ReverseMap();
         CreateMap<ProductImages,ResultProductImageDTO>().ReverseMap();
-
-
-
     }
 }

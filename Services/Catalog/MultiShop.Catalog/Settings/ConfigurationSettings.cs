@@ -1,9 +1,7 @@
 ﻿using MultiShop.Catalog.Services.CategoryServices;
-using MultiShop.Catalog.Services.ProductDetailDetailServices;
 using MultiShop.Catalog.Services.ProductDetailServices;
 using MultiShop.Catalog.Services.ProductImageServices;
 using MultiShop.Catalog.Services.ProductServices;
-using AutoMapper;
 using Microsoft.Extensions.Options;
 
 namespace MultiShop.Catalog.Settings;
