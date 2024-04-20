@@ -1,5 +1,12 @@
+using MultiShop.Catalog.Settings;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.ContainerExtensions();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
