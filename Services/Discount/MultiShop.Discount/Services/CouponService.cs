@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using MultiShop.Discount.Context;
 using MultiShop.Discount.DTOs.CouponDTOs;
+using MultiShop.Discount.Entities;
 
 namespace MultiShop.Discount.Services;
 
@@ -15,7 +16,7 @@ public class CouponService : ICouponService
 
     public async Task CreateCoupon(CreateCouponDTO couponDTO)
     {
-        string query = $@"insert into Coupons (Code,Rate,IsActive,ValidDate) values 
+        string query = $@"insert into Coupons (Code,Rate,isActive,ValidDate) values 
                           (@code,@rate,@isActive,@validDate)";
         var parameters = new DynamicParameters();
         parameters.Add("@code", couponDTO.Code);
@@ -40,12 +41,12 @@ public class CouponService : ICouponService
 
     public async Task<GetByIdCouponDTO> GetByIdCoupon(int couponId)
     {
-        string query = "select * from where CouponId = @couponId";
+        string query = "select * from Coupons WHERE CouponId = @couponId";
         var parameters = new DynamicParameters();
-        parameters.Add("@counponId", couponId);
+        parameters.Add("@couponId", couponId);
         using (var connections = _dapperContext.CreateConnection())
         {
-            var values = await connections.QueryFirstOrDefaultAsync(query, parameters);
+            var values = await connections.QueryFirstOrDefaultAsync<GetByIdCouponDTO>(query, parameters);
             return values;
         }
     }
@@ -60,13 +61,14 @@ public class CouponService : ICouponService
 
     public async Task UpdateCoupon(UpdateCouponDTO couponDTO)
     {
-        string query = @$"Update Coupons set Code = @code ,Rate = @rate ,IsActive = @isActive,ValidDate = @validDate values 
-                          where CouponId = @couponId";
+        string query = @$"Update Coupons set Code = @code ,Rate = @rate , isActive = @isActive,ValidDate = @validDate 
+                          WHERE CouponId = @couponId";
         var parameters = new DynamicParameters();
         parameters.Add("@code", couponDTO.Code);
         parameters.Add("@rate", couponDTO.Rate);
         parameters.Add("@isActive", couponDTO.isActive);
         parameters.Add("@validDate", couponDTO.ValidDate);
+        parameters.Add("couponId", couponDTO.CouponId);
         using (var connection = _dapperContext.CreateConnection())
         {
            await connection.ExecuteAsync(query, parameters);

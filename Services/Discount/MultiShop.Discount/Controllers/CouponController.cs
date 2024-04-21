@@ -20,7 +20,7 @@ public class CouponController : ControllerBase
         var values = await _couponService.GetCoupons();
         return Ok(values);
     }
-    [HttpGet]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetDiscountCouponById(int id)
     {
         var values = await _couponService.GetByIdCoupon(id);
