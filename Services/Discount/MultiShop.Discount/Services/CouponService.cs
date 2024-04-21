@@ -27,24 +27,49 @@ public class CouponService : ICouponService
             await connection.ExecuteAsync(query, parameters);
         } 
     }
-
-    public Task DeleteCoupon(int couponId)
+    public async Task DeleteCoupon(int couponId)
     {
-        throw new NotImplementedException();
+        string query = "Delete from Coupons where CouponId=@couponId";
+        var parameters = new DynamicParameters();
+        parameters.Add("couponId", couponId);
+        using (var connection= _dapperContext.CreateConnection())
+        {
+            await connection.ExecuteAsync(query, parameters);
+        }
     }
 
-    public Task<GetByIdCouponDTO> GetByIdCoupon(int couponId)
+    public async Task<GetByIdCouponDTO> GetByIdCoupon(int couponId)
     {
-        throw new NotImplementedException();
+        string query = "select * from where CouponId = @couponId";
+        var parameters = new DynamicParameters();
+        parameters.Add("@counponId", couponId);
+        using (var connections = _dapperContext.CreateConnection())
+        {
+            var values = await connections.QueryFirstOrDefaultAsync(query, parameters);
+            return values;
+        }
     }
 
-    public Task<List<ResultCouponDTO>> GetCoupons()
+    public async Task<List<ResultCouponDTO>> GetCoupons()
     {
-        throw new NotImplementedException();
+        string query = "select * from coupons";
+        using var connection = _dapperContext.CreateConnection();
+        var values = await connection.QueryAsync<ResultCouponDTO>(query);
+        return values.ToList();
     }
 
-    public Task UpdateCoupon(UpdateCouponDTO couponDTO)
+    public async Task UpdateCoupon(UpdateCouponDTO couponDTO)
     {
-        throw new NotImplementedException();
+        string query = @$"Update Coupons set Code = @code ,Rate = @rate ,IsActive = @isActive,ValidDate = @validDate values 
+                          where CouponId = @couponId";
+        var parameters = new DynamicParameters();
+        parameters.Add("@code", couponDTO.Code);
+        parameters.Add("@rate", couponDTO.Rate);
+        parameters.Add("@isActive", couponDTO.isActive);
+        parameters.Add("@validDate", couponDTO.ValidDate);
+        using (var connection = _dapperContext.CreateConnection())
+        {
+           await connection.ExecuteAsync(query, parameters);
+        }
     }
 }
