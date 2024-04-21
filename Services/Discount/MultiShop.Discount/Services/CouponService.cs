@@ -1,12 +1,31 @@
-﻿using MultiShop.Discount.DTOs.CouponDTOs;
+﻿using Dapper;
+using MultiShop.Discount.Context;
+using MultiShop.Discount.DTOs.CouponDTOs;
 
 namespace MultiShop.Discount.Services;
 
 public class CouponService : ICouponService
 {
-    public Task CreateCoupon(CreateCouponDTO couponDTO)
+    private readonly DapperContext _dapperContext;
+
+    public CouponService(DapperContext dapperContext)
     {
-        throw new NotImplementedException();
+        _dapperContext = dapperContext;
+    }
+
+    public async Task CreateCoupon(CreateCouponDTO couponDTO)
+    {
+        string query = $@"insert into Coupons (Code,Rate,IsActive,ValidDate) values 
+                          (@code,@rate,@isActive,@validDate)";
+        var parameters = new DynamicParameters();
+        parameters.Add("@code", couponDTO.Code);
+        parameters.Add("@rate",couponDTO.Rate);
+        parameters.Add("@isActive", couponDTO.isActive);
+        parameters.Add("@validDate", couponDTO.ValidDate);
+        using (var connection = _dapperContext.CreateConnection())
+        {
+            await connection.ExecuteAsync(query, parameters);
+        } 
     }
 
     public Task DeleteCoupon(int couponId)
